@@ -1,4 +1,5 @@
 import 'package:covac/citizen_registeration.dart';
+import 'package:covac/vaccinator.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
@@ -6,6 +7,8 @@ List<person> conformationList = List<person>();
 
 class BookingConformationChecker extends StatefulWidget {
   static const routename = '/bookingconfirm';
+  Vaccinator _vaccinator;
+  BookingConformationChecker(this._vaccinator);
   @override
   _BookingConformationCheckerState createState() =>
       _BookingConformationCheckerState();
@@ -27,7 +30,8 @@ class _BookingConformationCheckerState
         var values = data.value;
         for (var key in keys) {
           if (values[key]['isrequestbooking'] == true &&
-              values[key]['isbooked'] == false) {
+              values[key]['isbooked'] == false &&
+           widget._vaccinator.placereserved == values[key]['placebooked']) {
             person p = person(values[key]['name'].toString(),
                 values[key]['mobileno'].toString());
             print('name: ' +

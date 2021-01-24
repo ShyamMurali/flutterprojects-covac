@@ -3,6 +3,7 @@ import 'package:covac/citizen_home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pin_put/pin_put.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class OTPScreen extends StatefulWidget {
   static const routename ='/otp';
@@ -62,10 +63,17 @@ class _OTPScreenState extends State<OTPScreen> {
                           verificationId: _verificationCode, smsCode: pin))
                       .then((value) async {
                     if (value.user != null) {
-                      // Navigator.pushAndRemoveUntil(
-                      //     context,
-                      //     MaterialPageRoute(builder: (context) => Home()),
-                      //     (route) => false);
+                      
+                      Fluttertoast.showToast(
+       msg: "Registeration Sucessfull! ",
+       toastLength: Toast.LENGTH_SHORT,
+       gravity: ToastGravity.CENTER,
+       timeInSecForIosWeb: 1,
+       backgroundColor: Colors.black,
+       textColor: Colors.white,
+       fontSize: 20,
+     );
+
 
                       Navigator.pushReplacementNamed(context, CitizenHomePage.routename,arguments: widget._citizen);
                     }
@@ -91,10 +99,16 @@ class _OTPScreenState extends State<OTPScreen> {
               .signInWithCredential(credential)
               .then((value) async {
             if (value.user != null) {
-              // Navigator.pushAndRemoveUntil(
-              //     context,
-              //     MaterialPageRoute(builder: (context) => Home()),
-              //     (route) => false);
+
+      Fluttertoast.showToast(
+       msg: "Registeration Sucessfull! ",
+       toastLength: Toast.LENGTH_SHORT,
+       gravity: ToastGravity.CENTER,
+       timeInSecForIosWeb: 1,
+       backgroundColor: Colors.black,
+       textColor: Colors.white,
+       fontSize: 20,
+     );
 
                Navigator.pushReplacementNamed(context, CitizenHomePage.routename,arguments: widget._citizen);
             }
@@ -118,7 +132,6 @@ class _OTPScreenState extends State<OTPScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _verifyPhone();
   }

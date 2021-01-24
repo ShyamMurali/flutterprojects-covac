@@ -7,9 +7,11 @@ import 'package:firebase_database/firebase_database.dart';
 
 class Challenges extends StatefulWidget {
   static const routename = '/challenges';
-  Citizen citizen;
-  Challenges(this.citizen);
-  final _userref = FirebaseDatabase.instance.reference();
+  Citizen _citizen;
+  Challenges(this._citizen){
+    print('constructor mob: '+_citizen.mobileno.toString());
+  }
+  
   @override
   _ChallengesState createState() => _ChallengesState();
 }
@@ -36,7 +38,7 @@ class _ChallengesState extends State<Challenges> {
                   'Collect your badge on your first slot booking for vaccination'),
               trailing: Icon(Icons.keyboard_arrow_down),
               onTap: () {
-                if (widget.citizen.isbadge2 == false)
+                if (widget._citizen.isbadge2 == false)
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
@@ -57,7 +59,7 @@ class _ChallengesState extends State<Challenges> {
                       );
                     },
                   );
-                if (widget.citizen.isbadge2 == true) _badgeearned(context);
+                if (widget._citizen.isbadge2 == true) _badgeearned(context);
               },
             ),
             ListTile(
@@ -66,17 +68,18 @@ class _ChallengesState extends State<Challenges> {
                   'Read the given covid info and take the quiz to colllect the badge'),
               trailing: Icon(Icons.keyboard_arrow_down),
               onTap: () {
-                if (widget.citizen.isbadge3 == false){
-                  dbref.child('citizen/${citizen.mobileno}').update({
-                    'isbadge3':true,
-                    'badgeno':citizen.badgeno+1,
-                  }).then((value) {
-                     Navigator.pushNamed(context, Covid_Safety.routename,
-                      arguments: citizen);
-                  });
+                if (widget._citizen.isbadge3 == false){
+                  // widget._userref.child('citizen/${widget._citizen.mobileno}').update({
+                  //   'isbadge3':true,
+                  //   'badgeno':widget._citizen.badgeno+1,
+                  // }).then((value) {
+                  //    Navigator.pushNamed(context, Covid_Safety.routename,
+                  //     arguments: widget._citizen);
+                  // });
+                  Navigator.pushNamed(context, Covid_Safety.routename,arguments: widget._citizen);
                 }
                  
-                if (widget.citizen.isbadge3 == true) _badgeearned(context);
+                if (widget._citizen.isbadge3 == true) _badgeearned(context);
               },
             ),
             ListTile(
@@ -84,7 +87,7 @@ class _ChallengesState extends State<Challenges> {
               subtitle: Text('Collect your badge by taking your first vaccine'),
               trailing: Icon(Icons.keyboard_arrow_down),
               onTap: () {
-                if (widget.citizen.isbadge4 == false)
+                if (widget._citizen.isbadge4 == false)
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
@@ -105,7 +108,7 @@ class _ChallengesState extends State<Challenges> {
                       );
                     },
                   );
-                if (widget.citizen.isbadge2 == true) _badgeearned(context);
+                if (widget._citizen.isbadge4 == true) _badgeearned(context);
               },
             ),
             ListTile(
@@ -114,10 +117,10 @@ class _ChallengesState extends State<Challenges> {
                   'Collect your badge by uploading a selfie in mask from the gallery'),
               trailing: Icon(Icons.keyboard_arrow_down),
               onTap: () {
-                if (widget.citizen.isbadge5 == false)
+                if (widget._citizen.isbadge5 == false)
                   Navigator.pushNamed(context, UploadImage.routename,
                       arguments: citizen);
-                if (widget.citizen.isbadge5 == true) _badgeearned(context);
+                if (widget._citizen.isbadge5 == true) _badgeearned(context);
               },
             ),
           ],

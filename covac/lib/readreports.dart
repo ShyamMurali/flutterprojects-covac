@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 class _userclass{
   String username,report;
-  _userclass(this.username,this.report){}
+  int mobileno;
+  _userclass(this.username,this.report,this.mobileno){}
 }
  List<_userclass> conformationList =List<_userclass>() ;
 
@@ -14,9 +15,10 @@ class _userclass{
  }
  
  class _ReadreportsState extends State<Readreports> {
-   void work(){
+   bool isloading;
+   void work()async{
   final dbreference = FirebaseDatabase.instance.reference();
-  dbreference.child('reports').once().then((DataSnapshot data ){
+  await dbreference.child('reports').once().then((DataSnapshot data ){
     if(data != null){
      // print(data.value.keys);
  conformationList.clear();
@@ -25,13 +27,16 @@ class _userclass{
     print(values.keys);
    for( var key in keys)
    {
-      var  _data =_userclass(values[key]['name'].toString(),values[key]['report'].toString());
+      var  _data =_userclass(values[key]['name'].toString(),values[key]['report'].toString(),values[key]['mob']);
         conformationList.add(_data); 
      }
 
     }
     else print('data is empty');
    
+  });
+  setState(() {
+    isloading =false;
   });
 }
 ListView generateItemsList() {
@@ -47,6 +52,7 @@ ListView generateItemsList() {
            child: ListTile(title: Text('${conformationList[index].report}',
            style: TextStyle(fontWeight: FontWeight.bold),),
            leading: Text('name : ${conformationList[index].username}'),
+           trailing: Text('mob: ${conformationList[index].mobileno}'),
                 ),
               )
               ),
@@ -60,6 +66,7 @@ ListView generateItemsList() {
    super.initState();
   setState(() {
      work();
+     isloading =true;
   });
  }
    @override
@@ -69,7 +76,17 @@ ListView generateItemsList() {
         title: Text('Read Illness Report'),
         backgroundColor: Colors.black,
       ),
-      body: generateItemsList(),
+     body: Center(
+            child: Stack(children: <Widget>[
+          isloading
+              ? CircularProgressIndicator(
+                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.black),
+                  semanticsLabel: "Loading..",
+                  semanticsValue: "Loading..",
+                )
+              :generateItemsList()
+        ])
+        )
       
     );
    }

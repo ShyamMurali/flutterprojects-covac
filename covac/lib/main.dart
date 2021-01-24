@@ -53,9 +53,9 @@ class MyApp extends StatelessWidget {
         VaccinatorRegisteration.routeName:(ctx)=>VaccinatorRegisteration(),
         Faq.routename:(ctx)=>Faq(),
         Place.routename:(ctx)=>Place(),
-        Covid_Safety.routename:(ctx)=>Covid_Safety(),
-        CovidQuiz.routename:(ctx)=>CovidQuiz(),
-        BookingConformationChecker.routename:(ctx)=>BookingConformationChecker(),
+        // Covid_Safety.routename:(ctx)=>Covid_Safety(),
+      //  CovidQuiz.routename:(ctx)=>CovidQuiz(),
+        // BookingConformationChecker.routename:(ctx)=>BookingConformationChecker(),
         Readreports.routename:(c)=>Readreports(),
         Viewcertificate.routename:(c)=>Viewcertificate(),
         Citizen_login_or_signup.routename:(context)=>Citizen_login_or_signup(),
@@ -75,10 +75,29 @@ class MyApp extends StatelessWidget {
             return CitizenHomePage(args as Citizen);
             } );
         }
+          else if (settings.name == Covid_Safety.routename){
+          final args=settings.arguments;
+          return(MaterialPageRoute(builder: (context){
+           return Covid_Safety(args as Citizen);
+          }));
+        }
+           else if (settings.name == CovidQuiz.routename){
+          final args=settings.arguments;
+          return(MaterialPageRoute(builder: (context){
+           return CovidQuiz(args as Citizen);
+          }));
+        }
+
         else if (settings.name == Citizen_Report.routename){
           final args=settings.arguments;
           return(MaterialPageRoute(builder: (context){
            return Citizen_Report(args as Citizen);
+          }));
+        }
+        else if (settings.name == BookingConformationChecker.routename){
+          final args=settings.arguments;
+          return(MaterialPageRoute(builder: (context){
+           return BookingConformationChecker(args as Vaccinator);
           }));
         }
         else if (settings.name == UploadImage.routename) {

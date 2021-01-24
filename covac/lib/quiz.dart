@@ -1,10 +1,14 @@
+import 'package:covac/citizen.dart';
 import 'package:flutter/material.dart';
 import './answer.dart';
 import './question.dart';
 import './result.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class CovidQuiz extends StatefulWidget {
   static const routename = '/quiz';
+  Citizen _citizen;
+  CovidQuiz(this._citizen);
   @override
   State<StatefulWidget> createState() {
     return _MyAppState();
@@ -12,6 +16,16 @@ class CovidQuiz extends StatefulWidget {
 }
 
 class _MyAppState extends State<CovidQuiz> {
+
+  
+   void _worker(BuildContext context){
+     final _userref = FirebaseDatabase.instance.reference();
+    _userref.child('citizen/${widget._citizen.mobileno}').update({
+                    'isbadge3':true,
+                    'badgeno':widget._citizen.badgeno+1,
+                  });
+
+    }
   final _questions = const [
     {
       'questionText': 'Q1. What does COVID-19 stand for?',
@@ -169,12 +183,17 @@ class _MyAppState extends State<CovidQuiz> {
     if (_questionIndex < _questions.length) {
       print('We have more questions!');
     } else {
+      setState(() {
+          _worker(context);
+      });
+    
       print('No more questions!');
     }
   }
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(

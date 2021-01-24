@@ -30,7 +30,7 @@ class _VaccinatorHomepageState extends State<VaccinatorHomepage> {
               children: <Widget>[
                 FlatButton(child: Text(name),onPressed: (){
                  if( name == 'Confirm slot bookings'){
-                   Navigator.pushNamed(context, BookingConformationChecker.routename);
+                   Navigator.pushNamed(context, BookingConformationChecker.routename,arguments: widget.vaccinator);
                  }
                  else if(name == 'Confirm Vaccinations'){
                    Navigator.pushNamed(context, ConfirmVaccination.routename,arguments: widget.vaccinator).
@@ -75,7 +75,8 @@ class _VaccinatorHomepageState extends State<VaccinatorHomepage> {
     usrdb.child('vaccinator/${widget.vaccinator.mobileno}').once().then((DataSnapshot data) {
      if ( data!= null){
        var value =data.value;
-       widget.vaccinator=Vaccinator(
+      setState(() {
+         widget.vaccinator=Vaccinator(
          age: value['age'],
          date: DateTime.parse(value['date']),
          mobileno: value['mobileno'],
@@ -84,6 +85,8 @@ class _VaccinatorHomepageState extends State<VaccinatorHomepage> {
          placereserved: value['placereserved'],
          time: value['time'],
        );
+       print('num vacc: ${widget.vaccinator.numberofpplvaccinated}');
+      });
      }
     });
   }
@@ -115,54 +118,65 @@ class _VaccinatorHomepageState extends State<VaccinatorHomepage> {
           ),
         ),
         ),
-         body: Column(children: <Widget>[
+         body: SingleChildScrollView(
+                    child: Column(children: <Widget>[
         Card(margin: EdgeInsets.all(10),
-            elevation: 5,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    Text(widget.vaccinator.name,style: TextStyle(fontSize: 20),),
-                    Stack(
-                      alignment:Alignment.center,
-                      children:<Widget>[ Image.asset('assets/images/trophy.png'),
-        Positioned(
-          right: 6,
-          top: 2,
-          child: Container(
-            padding: EdgeInsets.all(2.0),
-            // color: Theme.of(context).accentColor,
-            decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  color: Colors.red,
+              elevation: 5,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Text(widget.vaccinator.name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                      Text("Age: "+widget.vaccinator.age.toString())
+        //               Stack(
+        //                 alignment:Alignment.center,
+        //                 children:<Widget>[ Image.asset('assets/images/trophy.png'),
+        // Positioned(
+        //     right: 6,
+        //     top: 2,
+        //     child: Container(
+        //       padding: EdgeInsets.all(2.0),
+        //       // color: Theme.of(context).accentColor,
+        //       decoration: BoxDecoration(
+        //             borderRadius: BorderRadius.circular(10.0),
+        //             color: Colors.red,
+        //       ),
+        //       constraints: BoxConstraints(
+        //             minWidth: 16,
+        //             minHeight: 16,
+        //       ),
+        //       child: Text(
+        //             '1',
+        //             textAlign: TextAlign.center,
+        //             style: TextStyle(
+        //               fontSize: 10,
+        //             ),
+        //       ),
+        //     ),
+        // )
+        //               ],)
+                    ],
             ),
-            constraints: BoxConstraints(
-                  minWidth: 16,
-                  minHeight: 16,
-            ),
-            child: Text(
-                  '1',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 10,
-                  ),
-            ),
-          ),
-        )
-                    ],)
+            Text("(vaccinator)")
                   ],
-          ),
-          Text("(vaccinator)")
-                ],
+                ),
               ),
-            ),
         ),
-        cardcreator('Number of people Vaccinated: ${widget.vaccinator.numberofpplvaccinated.toString()}', context),
+        cardcreator( "Working at :\n"+widget.vaccinator.placereserved+"\n"+widget.vaccinator.time,context),
+        cardcreator('Number of people you vaccinated: ${widget.vaccinator.numberofpplvaccinated.toString()}', context),
+        
+           Container(padding: EdgeInsets.all(5),
+              
+              child: Image.asset('assets/images/vaccine home.jpeg'),),
+               Container(padding: EdgeInsets.all(5),
+              
+              child: Image.asset('assets/images/vaccinehome2.jpeg'),),
       
       ],),
+         ),
       );
   }
 }

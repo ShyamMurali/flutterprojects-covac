@@ -2,7 +2,6 @@ import 'package:covac/otp.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'citizen.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 User user;
@@ -18,69 +17,6 @@ final aadharcardconrtroller=TextEditingController();
 final mobilenocontroller=TextEditingController();
 final statecontoller=TextEditingController();
 final dbref = FirebaseDatabase.instance.reference();
-
-
-
-  //  Future<bool>login (String phone,BuildContext context) async{
-  //    phone='+91'+phone;
-  //    print(phone);
-  //    final codecontroller =TextEditingController();
-  //   FirebaseAuth _auth =FirebaseAuth.instance;
-  //   _auth.verifyPhoneNumber(
-  //     phoneNumber: phone,
-  //      verificationCompleted: (AuthCredential credential) async{
-  //        var result= await  _auth.signInWithCredential(credential);
-  
-  //       user= result.user;
-  //       if(user != null){
-  //         print('login sucess!');
-  //       }
-  //      },
-  //       verificationFailed:(FirebaseAuthException exception){
-  //         print(exception);
-  //       },
-  //        codeSent: (String verificationid,[int forceresendingtoken]){
-  //          showDialog(context: context,
-  //          barrierDismissible: false,
-  //          builder: (context){
-  //          return AlertDialog(
-  //            content: Column(
-  //              mainAxisSize: MainAxisSize.min,
-  //              children: [
-  //               TextField(          maxLines: 1,
-  //                                   minLines: 1,
-  //                                   cursorColor: Colors.black,
-  //                                   controller: codecontroller,
-  //                                   decoration: InputDecoration(
-  //                                     labelText: 'Please enter your feedbacks',
-  //                                     border: OutlineInputBorder(
-  //                                       borderRadius: BorderRadius.circular(3),
-  //                                     ),
-  //                                   ),
-  //                                 ),
-  //            ],),
-  //            actions: [
-  //              FlatButton(textColor: Colors.white,
-  //                color: Colors.black,
-  //                onPressed: () async{
-  //                  AuthCredential credential = PhoneAuthProvider.getCredential(verificationId: verificationid, smsCode:codecontroller.text.trim());
-  //                   var result= await  _auth.signInWithCredential(credential);
-  //        user= result.user;
-  //       if(user != null){
-  //         print('login sucess!');
-  //       }
-
-  //                },
-  //                  child: Text('Confirm',))
-  //            ],
-  //          );
-  //          });
-  //        },
-  //         codeAutoRetrievalTimeout: null
-  //         );
-
-  // }
-
 
  void register({String name,int age,int houseno,
    int pincode,String streetname,String location,String occupation,
@@ -116,15 +52,7 @@ final dbref = FirebaseDatabase.instance.reference();
 
    }).then((onValue){
      print('in register()');
-     Fluttertoast.showToast(
-       msg: "Registeration Sucessfull! ",
-       toastLength: Toast.LENGTH_SHORT,
-       gravity: ToastGravity.CENTER,
-       timeInSecForIosWeb: 1,
-       backgroundColor: Colors.black,
-       textColor: Colors.white,
-       fontSize: 20,
-     );
+     
     // //  login(citizen.mobileno.toString(),context);
     // Navigator.pushReplacementNamed(
     //   context, CitizenHomePage.routename,arguments: citizen);

@@ -1,11 +1,23 @@
 import 'package:covac/quiz.dart';
 import 'citizen.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_database/firebase_database.dart';
+
+Citizen _citizen1;
+void run(BuildContext context){
+Navigator.pushNamed(context, CovidQuiz.routename,arguments: _citizen1);
+}
+
 class Covid_Safety extends StatelessWidget {
   static const routename ='/covidsafety';
+  Citizen _citizen;
+  Covid_Safety(this._citizen){
+    _citizen1 =_citizen;
+  }
+ 
   @override
   Widget build(BuildContext context) {
+
+   
     return Scaffold(
       appBar: AppBar(title: Text('Covid Saftey Information'),
       backgroundColor: Colors.black,),
@@ -27,7 +39,7 @@ class BodyWidget extends StatelessWidget {
       ),
       RaisedButton(
         onPressed: () {
-          Navigator.pushNamed(context, CovidQuiz.routename);
+         run(context);
         },
          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: Text(

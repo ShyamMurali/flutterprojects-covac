@@ -182,6 +182,7 @@ class _CitizenHomePageState extends State<CitizenHomePage> {
         isbadge5: value['isbadge5'],
         badgeno: value['badgeno'],
       );
+    
         }
 
         print(" mob no: "+widget.citizen.mobileno.toString());
@@ -223,177 +224,190 @@ class _CitizenHomePageState extends State<CitizenHomePage> {
             ],
           ),
         ),),
-      body: Column(children: <Widget>[
-        Card(margin: EdgeInsets.all(10),
-            elevation: 5,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Text(widget.citizen.name,style: TextStyle(fontSize: 20),),
-                Stack(
-                  alignment:Alignment.center,
-                  children:<Widget>[ Image.asset('assets/images/trophy.png'),
-        Positioned(
-          right: 6,
-          top: 2,
-          child: Container(
-            padding: EdgeInsets.all(2.0),
-            // color: Theme.of(context).accentColor,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              color: Colors.red,
+      body: SingleChildScrollView(
+              child: Column(children: <Widget>[
+          Card(margin: EdgeInsets.all(10),
+              elevation: 5,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Text(widget.citizen.name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                      Text("Age: "+widget.citizen.age.toString(),style: TextStyle(fontSize:15),),
+          //         Stack(
+          //           alignment:Alignment.center,
+          //           children:<Widget>[ Image.asset('assets/images/trophy.png'),
+          // Positioned(
+          //   right: 6,
+          //   top: 2,
+          //   child: Container(
+          //     padding: EdgeInsets.all(2.0),
+          //     // color: Theme.of(context).accentColor,
+          //     decoration: BoxDecoration(
+          //       borderRadius: BorderRadius.circular(10.0),
+          //       color: Colors.red,
+          //     ),
+          //     constraints: BoxConstraints(
+          //       minWidth: 16,
+          //       minHeight: 16,
+          //     ),
+          //     child: Text(
+          //       widget.citizen.badgeno.toString(),
+          //       textAlign: TextAlign.center,
+          //       style: TextStyle(
+          //         fontSize: 10,
+          //       ),
+          //     ),
+          //   ),
+          // )
+          //         ],)
+
+
+                    ],
             ),
-            constraints: BoxConstraints(
-              minWidth: 16,
-              minHeight: 16,
-            ),
-            child: Text(
-              widget.citizen.badgeno.toString(),
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 10,
+            Text('(${widget.citizen.occupation})',textAlign: TextAlign.start,),
+                  ],
+                ),
               ),
-            ),
           ),
-        )
-                ],)
-              ],
+          cardcreator('Earn  badges by completing challenges',context),
+          Container(padding: EdgeInsets.all(5),
+            
+            child: Image.asset('assets/images/vaccine home.jpeg'),),
+           Container(
+             child: Card(margin: EdgeInsets.all(10),
+                elevation: 5,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    if(widget.globaldata != null)
+                    Column(
+                      children: [
+                       Text('Corona Virus Cases:',
+                       style: TextStyle(fontSize: 20,
+                      fontWeight: FontWeight.bold ,)),
+                      Text(widget.globaldata['TotalConfirmed'].toString(),
+                      style: TextStyle(fontSize: 20,
+                      fontWeight: FontWeight.bold ,),
+                      ),
+                      SizedBox(height:20),
+                       Text('Deaths:',
+                       style: TextStyle(fontSize: 20,
+                      fontWeight: FontWeight.bold ,)),
+                      Text(widget.globaldata['TotalDeaths'].toString(),
+                       style: TextStyle(fontSize: 20,
+                      fontWeight: FontWeight.bold ,)),
+                      SizedBox(height:20),
+                       Text('Recovered:',
+                       style: TextStyle(fontSize: 20,
+                      fontWeight: FontWeight.bold ,)),
+                      Text(widget.globaldata['TotalRecovered'].toString(),
+                      style: TextStyle(fontSize: 20,
+                      fontWeight: FontWeight.bold ,)),
+                      SizedBox(height:20),  
+                      ],
+                    ),
+                    if(widget.globaldata == null)
+                    Column(
+                      children: [
+                        SpinKitCircle(
+                          color: Colors.black,
+                          size: 100,
+                        )
+                      ],
+                    )
+
+
+                  ],
+              ),
+                ),
           ),
-            ),
-        ),
-        cardcreator('Earn more trophies by completing challenges',context),
-         Container(
-           child: Card(margin: EdgeInsets.all(10),
+           ),
+          if(widget.citizen.isrequestbooking ==false)
+          Card(margin: EdgeInsets.all(10),
               elevation: 5,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  if(widget.globaldata != null)
-                  Column(
-                    children: [
-                     Text('Corona Virus Cases:',
-                     style: TextStyle(fontSize: 20,
-                    fontWeight: FontWeight.bold ,)),
-                    Text(widget.globaldata['TotalConfirmed'].toString(),
-                    style: TextStyle(fontSize: 20,
-                    fontWeight: FontWeight.bold ,),
-                    ),
-                    SizedBox(height:20),
-                     Text('Deaths:',
-                     style: TextStyle(fontSize: 20,
-                    fontWeight: FontWeight.bold ,)),
-                    Text(widget.globaldata['TotalDeaths'].toString(),
-                     style: TextStyle(fontSize: 20,
-                    fontWeight: FontWeight.bold ,)),
-                    SizedBox(height:20),
-                     Text('Recovered:',
-                     style: TextStyle(fontSize: 20,
-                    fontWeight: FontWeight.bold ,)),
-                    Text(widget.globaldata['TotalRecovered'].toString(),
-                    style: TextStyle(fontSize: 20,
-                    fontWeight: FontWeight.bold ,)),
-                    SizedBox(height:20),  
-                    ],
-                  ),
-                  if(widget.globaldata == null)
-                  Column(
-                    children: [
-                      SpinKitCircle(
-                        color: Colors.black,
-                        size: 100,
-                      )
-                    ],
-                  )
-
-
+                  Text('Slot bookings for vaccinations can be done in the Side Drawer',
+                      textScaleFactor: .75,),
                 ],
             ),
               ),
-        ),
-         ),
-        if(widget.citizen.isrequestbooking ==false)
-        Card(margin: EdgeInsets.all(10),
-            elevation: 5,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Text('Slot bookings for vaccinations can be done in the Side Drawer',
-                    textScaleFactor: .75,),
-              ],
           ),
-            ),
-        ),
 
-         if(widget.citizen.isrequestbooking ==true && widget.citizen.isbooked == false)
-        Card(margin: EdgeInsets.all(10),
-            elevation: 5,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Text('your booking is being processed!',
-                    textScaleFactor: .75,),
-              ],
+           if(widget.citizen.isrequestbooking ==true && widget.citizen.isbooked == false)
+          Card(margin: EdgeInsets.all(10),
+              elevation: 5,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Text('your booking is being processed!',
+                      textScaleFactor: .75,),
+                ],
+            ),
+              ),
           ),
+
+
+           if(widget.citizen.isbooked ==true && widget.citizen.isvaccinated ==false)
+          Card(margin: EdgeInsets.all(10),
+              elevation: 5,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Text('Your booking is confirmed \n Please check the Slot booking for Further details',
+                      textScaleFactor: .75,),
+                ],
             ),
-        ),
-
-
-         if(widget.citizen.isbooked ==true && widget.citizen.isvaccinated ==false)
-        Card(margin: EdgeInsets.all(10),
-            elevation: 5,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Text('Your booking is confirmed \n Please check the Slot booking for Further details',
-                    textScaleFactor: .75,),
-              ],
+              ),
           ),
-            ),
-        ),
 
-         if(widget.citizen.isvaccinated ==true)
-        Card(margin: EdgeInsets.all(10),
-            elevation: 5,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Text('Yaay , you got Vaccinated,\n you can now avail our certificate \n and show off at your family and friends',
-                    textScaleFactor: .75,),
-              ],
+           if(widget.citizen.isvaccinated ==true)
+          Card(margin: EdgeInsets.all(10),
+              elevation: 5,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Text('Yaay , you got Vaccinated,\n You can now avait the certificate \n and show it off to  your family and friends',
+                      textScaleFactor: .75,),
+                ],
+            ),
+              ),
           ),
-            ),
-        ),
 
 
 
 
-        // Card(margin: EdgeInsets.all(10),
-        //     elevation: 5,
-        //     child: Padding(
-        //       padding: const EdgeInsets.all(8.0),
-        //       child: Row(
-        //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //       children: <Widget>[
-        //         Text("'wear mask ,save your loved ones'",),
-        //       ],
-        //   ),
-        //     ),
-        // ),
-        
+          // Card(margin: EdgeInsets.all(10),
+          //     elevation: 5,
+          //     child: Padding(
+          //       padding: const EdgeInsets.all(8.0),
+          //       child: Row(
+          //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //       children: <Widget>[
+          //         Text("'wear mask ,save your loved ones'",),
+          //       ],
+          //   ),
+          //     ),
+          // ),
+          
 
-      ],),
+        ],),
+      ),
     );
   }
 }

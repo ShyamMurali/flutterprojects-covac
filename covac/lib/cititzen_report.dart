@@ -4,9 +4,9 @@ import 'citizen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class Citizen_Report extends StatelessWidget {
-  Citizen citizen;
+  Citizen _citizen;
   static const routename='/report';
-  Citizen_Report(this.citizen);
+  Citizen_Report(this._citizen);
   final reportcontroller = TextEditingController();
   final dbreport =FirebaseDatabase.instance.reference();
   @override
@@ -40,10 +40,11 @@ class Citizen_Report extends StatelessWidget {
                                 RaisedButton(onPressed: (){
                                   String data = reportcontroller.text.trim();
                                   if(data !=null || data!= ""){
-                                    dbreport.child('reports/${citizen.name}').set({
+                                    dbreport.child('reports/${_citizen.name+_citizen.mobileno.toString()}').set({
                                      'report':data,
                                      'date':DateTime.now().toString(),
-                                     'name':citizen.name,
+                                     'name':_citizen.name,
+                                     'mob':_citizen.mobileno,
                                     }).then((value){
                                     Fluttertoast.showToast(
                                       msg: 'Your illness was reported!',

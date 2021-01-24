@@ -8,7 +8,9 @@ List<person> conformationList = List<person>();
 
 class ConfirmVaccination extends StatefulWidget {
   Vaccinator _vaccinator;
-  ConfirmVaccination(this._vaccinator);
+  ConfirmVaccination(this._vaccinator){
+   print('confirm vaccine : ${_vaccinator.mobileno}\n number: ${_vaccinator.numberofpplvaccinated}');
+  }
   static const routename = '/confirmvacc';
 
   @override
@@ -28,7 +30,9 @@ class _ConfirmVaccinationState extends State<ConfirmVaccination> {
         print(keys);
         var values = data.value;
         for (var key in keys) {
-          if (values[key]['isbooked'] == true && values[key]['isvaccinated'] == false) {
+          if (values[key]['isbooked'] == true &&
+           values[key]['isvaccinated'] == false &&
+           widget._vaccinator.placereserved == values[key]['placebooked'] ) {
             person p = person(values[key]['name'].toString(),
                 values[key]['mobileno'].toString());
             print('name: ' +
@@ -75,12 +79,16 @@ class _ConfirmVaccinationState extends State<ConfirmVaccination> {
                   },
                 );
               },
-              child: ListTile(
-                title: Text(
-                  '${conformationList[index].name}',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+              child: Card(
+                elevation: 1,
+           margin: EdgeInsets.only(bottom: 5,top:5,right:10,left:10), 
+                              child: ListTile(
+                  title: Text(
+                    '${conformationList[index].name}',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  leading: Text('mobile: ${conformationList[index].mobileno}'),
                 ),
-                leading: Text('mobile: ${conformationList[index].mobileno}'),
               )),
           background: slideRightBackground(),
           secondaryBackground: slideLeftBackground(),
@@ -149,7 +157,7 @@ class _ConfirmVaccinationState extends State<ConfirmVaccination> {
                           ),
                           onPressed: () {
                             // TODO: Delete the item from DB etc..
-                           int num;
+                           int num =0;
                             
                                 dbref.child('citizen/${conformationList[index].mobileno}').once().then((DataSnapshot data){
                             if(data !=null){
@@ -166,11 +174,11 @@ class _ConfirmVaccinationState extends State<ConfirmVaccination> {
                               dbref.child('citizen/${conformationList[index].mobileno}').update({
                              'isvaccinated':true,
                              'isbadge4':true,
-                             'badgeno':num+1,
+                           //  'badgeno':num+1,
                             }).then((value) {
-                            widget._vaccinator.numberofpplvaccinated+=1;
+                          
                              dbref.child('vaccinator/${widget._vaccinator.mobileno}').update({
-                               'numberofpplvaccinated':widget._vaccinator.numberofpplvaccinated,
+                               'numberofpplvaccinated':widget._vaccinator.numberofpplvaccinated+1,
                              });
 
 
@@ -284,7 +292,9 @@ class _ConfirmVaccinationState extends State<ConfirmVaccination> {
                       color: Colors.white),
                   textAlign: TextAlign.center),*/
               generateItemsList()
-        ])));
+        ])
+        )
+        );
   }
 }
 
