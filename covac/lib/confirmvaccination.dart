@@ -8,8 +8,9 @@ List<person> conformationList = List<person>();
 
 class ConfirmVaccination extends StatefulWidget {
   Vaccinator _vaccinator;
-  ConfirmVaccination(this._vaccinator){
-   print('confirm vaccine : ${_vaccinator.mobileno}\n number: ${_vaccinator.numberofpplvaccinated}');
+  ConfirmVaccination(this._vaccinator) {
+    print(
+        'confirm vaccine : ${_vaccinator.mobileno}\n number: ${_vaccinator.numberofpplvaccinated}');
   }
   static const routename = '/confirmvacc';
 
@@ -31,8 +32,8 @@ class _ConfirmVaccinationState extends State<ConfirmVaccination> {
         var values = data.value;
         for (var key in keys) {
           if (values[key]['isbooked'] == true &&
-           values[key]['isvaccinated'] == false &&
-           widget._vaccinator.placereserved == values[key]['placebooked'] ) {
+              values[key]['isvaccinated'] == false &&
+              widget._vaccinator.placereserved == values[key]['placebooked']) {
             person p = person(values[key]['name'].toString(),
                 values[key]['mobileno'].toString());
             print('name: ' +
@@ -80,9 +81,10 @@ class _ConfirmVaccinationState extends State<ConfirmVaccination> {
                 );
               },
               child: Card(
+                color: Colors.white,
                 elevation: 1,
-           margin: EdgeInsets.only(bottom: 5,top:5,right:10,left:10), 
-                              child: ListTile(
+                margin: EdgeInsets.only(bottom: 5, top: 5, right: 10, left: 10),
+                child: ListTile(
                   title: Text(
                     '${conformationList[index].name}',
                     style: TextStyle(fontWeight: FontWeight.bold),
@@ -157,41 +159,44 @@ class _ConfirmVaccinationState extends State<ConfirmVaccination> {
                           ),
                           onPressed: () {
                             // TODO: Delete the item from DB etc..
-                           int num =0;
-                            
-                                dbref.child('citizen/${conformationList[index].mobileno}').once().then((DataSnapshot data){
-                            if(data !=null){
+                            int num = 0;
 
-                              num=data.value['badgeno'];
-                              print(num.toString());
-                              
-                            }
-                            else print("data is null");
-
-                            } );
-
-
-                              dbref.child('citizen/${conformationList[index].mobileno}').update({
-                             'isvaccinated':true,
-                             'isbadge4':true,
-                           //  'badgeno':num+1,
-                            }).then((value) {
-                          
-                             dbref.child('vaccinator/${widget._vaccinator.mobileno}').update({
-                               'numberofpplvaccinated':widget._vaccinator.numberofpplvaccinated+1,
-                             });
-
-
+                            dbref
+                                .child(
+                                    'citizen/${conformationList[index].mobileno}')
+                                .once()
+                                .then((DataSnapshot data) {
+                              if (data != null) {
+                                num = data.value['badgeno'];
+                                print(num.toString());
+                              } else
+                                print("data is null");
                             });
 
-                           
-                            // TODO: 
-                             
+                            dbref
+                                .child(
+                                    'citizen/${conformationList[index].mobileno}')
+                                .update({
+                              'isvaccinated': true,
+                              'isbadge4': true,
+                              //  'badgeno':num+1,
+                            }).then((value) {
+                              dbref
+                                  .child(
+                                      'vaccinator/${widget._vaccinator.mobileno}')
+                                  .update({
+                                'numberofpplvaccinated':
+                                    widget._vaccinator.numberofpplvaccinated +
+                                        1,
+                              });
+                            });
+
+                            // TODO:
+
                             setState(() {
                               conformationList.removeAt(index);
                             });
                             Navigator.of(context).pop();
-
                           },
                         ),
                       ],
@@ -275,26 +280,28 @@ class _ConfirmVaccinationState extends State<ConfirmVaccination> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Confirm Vaccination'),
-          backgroundColor: Colors.black,
+           backgroundColor: Colors.blueGrey[900],
         ),
+        backgroundColor: Colors.blueGrey[900],
         body: Center(
             child: Stack(children: <Widget>[
           isloading
               ? CircularProgressIndicator(
-                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.black),
+                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
                   semanticsLabel: "Loading..",
                   semanticsValue: "Loading..",
                 )
-              : /*Text("Select a customer to view details",
+              : conformationList.length == 0
+                  ? Text("No vaccines to be confirmed!",
+                      style: TextStyle(fontSize: 20, color: Colors.white))
+                  : /*Text("Select a customer to view details",
                   style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
                   textAlign: TextAlign.center),*/
-              generateItemsList()
-        ])
-        )
-        );
+                  generateItemsList()
+        ])));
   }
 }
 

@@ -67,7 +67,7 @@ class _ReadfeedbacksState extends State<Readfeedbacks> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Read Feedbacks'),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.blueGrey[900],
       ),
       body: generateItemsList(),
       

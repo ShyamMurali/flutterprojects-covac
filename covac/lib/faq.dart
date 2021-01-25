@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:expandable/expandable.dart';
+
 class Faq extends StatefulWidget {
-  static const routename ='/faq';
+  static const routename = '/faq';
   @override
   _FaqState createState() => _FaqState();
 }
@@ -9,11 +10,12 @@ class Faq extends StatefulWidget {
 class _FaqState extends State<Faq> {
   @override
   Widget build(BuildContext context) {
-     return Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text("FAQ"),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.blueGrey[900],
       ),
+      backgroundColor: Colors.blueGrey[900],
       body: ExpandableTheme(
         data: const ExpandableThemeData(
           iconColor: Colors.black,
@@ -25,7 +27,7 @@ class _FaqState extends State<Faq> {
             Card1(),
             Card2(),
             Card3(),
-            Card4(), 
+            Card4(),
             Card5(),
             Card6(),
             Card7(),
@@ -45,6 +47,7 @@ class Card1 extends StatelessWidget {
         child: Padding(
       padding: const EdgeInsets.all(10),
       child: Card(
+        color: Colors.white,
         clipBehavior: Clip.antiAlias,
         child: Column(
           children: <Widget>[
@@ -60,7 +63,7 @@ class Card1 extends StatelessWidget {
                     padding: EdgeInsets.all(10),
                     child: Text(
                       "What are the steps to be taken for registering for a vaccine?",
-                      style: Theme.of(context).textTheme.body2,
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     )),
                 expanded: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,6 +103,7 @@ class Card4 extends StatelessWidget {
         child: Padding(
       padding: const EdgeInsets.all(10),
       child: Card(
+        color: Colors.white,
         clipBehavior: Clip.antiAlias,
         child: Column(
           children: <Widget>[
@@ -115,7 +119,7 @@ class Card4 extends StatelessWidget {
                     padding: EdgeInsets.all(10),
                     child: Text(
                       "How many doses of the vaccine do I need to take to complete the vaccination schedule and at what intervals?",
-                      style: Theme.of(context).textTheme.body2,
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     )),
                 expanded: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,6 +159,7 @@ class Card2 extends StatelessWidget {
         child: Padding(
       padding: const EdgeInsets.all(10),
       child: Card(
+        color: Colors.white,
         clipBehavior: Clip.antiAlias,
         child: Column(
           children: <Widget>[
@@ -170,7 +175,7 @@ class Card2 extends StatelessWidget {
                     padding: EdgeInsets.all(10),
                     child: Text(
                       "Is it mandatory to take the vaccine?",
-                      style: Theme.of(context).textTheme.body2,
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     )),
                 expanded: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -210,6 +215,7 @@ class Card9 extends StatelessWidget {
         child: Padding(
       padding: const EdgeInsets.all(10),
       child: Card(
+        color: Colors.white,
         clipBehavior: Clip.antiAlias,
         child: Column(
           children: <Widget>[
@@ -225,7 +231,7 @@ class Card9 extends StatelessWidget {
                     padding: EdgeInsets.all(10),
                     child: Text(
                       "How do I gain badges or maintain streaks?",
-                      style: Theme.of(context).textTheme.body2,
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     )),
                 expanded: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -265,6 +271,7 @@ class Card8 extends StatelessWidget {
         child: Padding(
       padding: const EdgeInsets.all(10),
       child: Card(
+        color: Colors.white,
         clipBehavior: Clip.antiAlias,
         child: Column(
           children: <Widget>[
@@ -280,7 +287,7 @@ class Card8 extends StatelessWidget {
                     padding: EdgeInsets.all(10),
                     child: Text(
                       "How do I contact back when facing an issue?",
-                      style: Theme.of(context).textTheme.body2,
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     )),
                 expanded: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -320,6 +327,7 @@ class Card3 extends StatelessWidget {
         child: Padding(
       padding: const EdgeInsets.all(10),
       child: Card(
+        color: Colors.white,
         clipBehavior: Clip.antiAlias,
         child: Column(
           children: <Widget>[
@@ -335,7 +343,7 @@ class Card3 extends StatelessWidget {
                     padding: EdgeInsets.all(10),
                     child: Text(
                       "How will I know if I am eligible for vaccination?",
-                      style: Theme.of(context).textTheme.body2,
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     )),
                 expanded: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -375,6 +383,7 @@ class Card7 extends StatelessWidget {
         child: Padding(
       padding: const EdgeInsets.all(10),
       child: Card(
+        color: Colors.white,
         clipBehavior: Clip.antiAlias,
         child: Column(
           children: <Widget>[
@@ -390,7 +399,7 @@ class Card7 extends StatelessWidget {
                     padding: EdgeInsets.all(10),
                     child: Text(
                       "Are there any preventive measures and precautions that one needs to follow at the session site?",
-                      style: Theme.of(context).textTheme.body2,
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     )),
                 expanded: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -430,6 +439,7 @@ class Card5 extends StatelessWidget {
         child: Padding(
       padding: const EdgeInsets.all(10),
       child: Card(
+        color: Colors.white,
         clipBehavior: Clip.antiAlias,
         child: Column(
           children: <Widget>[
@@ -445,7 +455,7 @@ class Card5 extends StatelessWidget {
                     padding: EdgeInsets.all(10),
                     child: Text(
                       "When would the antibodies develop? After taking the first dose, after taking the second dose, or much later?",
-                      style: Theme.of(context).textTheme.body2,
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     )),
                 expanded: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -485,6 +495,7 @@ class Card6 extends StatelessWidget {
         child: Padding(
       padding: const EdgeInsets.all(10),
       child: Card(
+        color: Colors.white,
         clipBehavior: Clip.antiAlias,
         child: Column(
           children: <Widget>[
@@ -500,7 +511,7 @@ class Card6 extends StatelessWidget {
                     padding: EdgeInsets.all(10),
                     child: Text(
                       "Will vaccinated beneficiaries receive information on the status of their vaccination after completion?",
-                      style: Theme.of(context).textTheme.body2,
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     )),
                 expanded: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

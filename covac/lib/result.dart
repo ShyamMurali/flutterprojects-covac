@@ -33,19 +33,21 @@ class Result extends StatelessWidget {
         children: <Widget>[
           Text(
             resultPhrase,
-            style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                color: Colors.white, fontSize: 26, fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
           ), //Text
           Text(
             'Score ' '$resultScore',
-            style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                color: Colors.white, fontSize: 36, fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
           ), //Text
           FlatButton(
             child: Text(
               'Restart Quiz!',
             ), //Text
-            textColor: Colors.black,
+            textColor: Colors.white,
             onPressed: resetHandler,
           ),
 
@@ -53,7 +55,7 @@ class Result extends StatelessWidget {
             child: Text(
               'Collect Your Badge and Go back to Covid Info!',
             ), //Text
-            textColor: Colors.black,
+            textColor: Colors.white,
             onPressed: resetC,
           ),
         ], //<Widget>[]

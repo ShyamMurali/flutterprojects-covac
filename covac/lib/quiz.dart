@@ -16,16 +16,14 @@ class CovidQuiz extends StatefulWidget {
 }
 
 class _MyAppState extends State<CovidQuiz> {
-
-  
-   void _worker(BuildContext context){
-     final _userref = FirebaseDatabase.instance.reference();
+  void _worker(BuildContext context) {
+    final _userref = FirebaseDatabase.instance.reference();
     _userref.child('citizen/${widget._citizen.mobileno}').update({
-                    'isbadge3':true,
-                    'badgeno':widget._citizen.badgeno+1,
-                  });
+      'isbadge3': true,
+      'badgeno': widget._citizen.badgeno + 1,
+    });
+  }
 
-    }
   final _questions = const [
     {
       'questionText': 'Q1. What does COVID-19 stand for?',
@@ -184,22 +182,22 @@ class _MyAppState extends State<CovidQuiz> {
       print('We have more questions!');
     } else {
       setState(() {
-          _worker(context);
+        _worker(context);
       });
-    
+
       print('No more questions!');
     }
   }
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: Text('Covid Quiz'),
-          backgroundColor: Colors.black,
+           backgroundColor: Colors.blueGrey[900],
         ),
+        backgroundColor: Colors.blueGrey[900],
         body: Padding(
           padding: const EdgeInsets.all(30.0),
           child: _questionIndex < _questions.length

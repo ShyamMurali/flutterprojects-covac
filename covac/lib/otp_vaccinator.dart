@@ -1,19 +1,20 @@
-import 'package:covac/citizen.dart';
-import 'package:covac/citizen_home.dart';
+
+import 'package:covac/vaccinator.dart';
+import 'package:covac/vaccinator_home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class OTPScreen extends StatefulWidget {
-  static const routename = '/otp';
-  final Citizen _citizen;
-  OTPScreen(this._citizen);
+class OTPVacScreen extends StatefulWidget {
+  static const routename = '/otpvaccinator';
+  final Vaccinator _vaccinator;
+  OTPVacScreen(this._vaccinator);
   @override
   _OTPScreenState createState() => _OTPScreenState();
 }
 
-class _OTPScreenState extends State<OTPScreen> {
+class _OTPScreenState extends State<OTPVacScreen> {
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
   String _verificationCode;
   final TextEditingController _pinPutController = TextEditingController();
@@ -39,7 +40,7 @@ class _OTPScreenState extends State<OTPScreen> {
             margin: EdgeInsets.only(top: 40),
             child: Center(
               child: Text(
-                'Verify +91-${widget._citizen.mobileno}',
+                'Verify +91-${widget._vaccinator.mobileno}',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
               ),
             ),
@@ -75,8 +76,8 @@ class _OTPScreenState extends State<OTPScreen> {
                       );
 
                       Navigator.pushReplacementNamed(
-                          context, CitizenHomePage.routename,
-                          arguments: widget._citizen);
+                          context, VaccinatorHomepage.routename,
+                          arguments: widget._vaccinator);
                     }
                   });
                 } catch (e) {
@@ -94,7 +95,7 @@ class _OTPScreenState extends State<OTPScreen> {
 
   _verifyPhone() async {
     await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: '+91${widget._citizen.mobileno}',
+        phoneNumber: '+91${widget._vaccinator.mobileno}',
         verificationCompleted: (PhoneAuthCredential credential) async {
           await FirebaseAuth.instance
               .signInWithCredential(credential)
@@ -110,8 +111,8 @@ class _OTPScreenState extends State<OTPScreen> {
                 fontSize: 20,
               );
 
-              Navigator.pushReplacementNamed(context, CitizenHomePage.routename,
-                  arguments: widget._citizen);
+              Navigator.pushReplacementNamed(context, VaccinatorHomepage.routename,
+                  arguments: widget._vaccinator);
             }
           });
         },

@@ -12,8 +12,8 @@ class Answer extends StatelessWidget {
       width: double.infinity,
       margin: const EdgeInsets.all(5),
       child: RaisedButton(
-        color: Colors.blueAccent,
-        textColor: Colors.white,
+        color: Colors.white,
+        textColor: Colors.black,
         child: Text(answerText),
         onPressed: selectHandler,
         padding: EdgeInsets.fromLTRB(10, 10, 10, 10),

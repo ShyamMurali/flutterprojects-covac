@@ -36,8 +36,9 @@ class _ManualsState extends State<Manuals> {
     return new Scaffold(
       appBar: AppBar(
         title: Text('Vaccine Manual'),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.blueGrey[900],
       ),
+      backgroundColor: Colors.blueGrey[900],
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -45,7 +46,10 @@ class _ManualsState extends State<Manuals> {
             Flexible(
               flex: 8,
               child: _isLoading
-                  ? CircularProgressIndicator()
+                  ? CircularProgressIndicator(
+                      valueColor:
+                          new AlwaysStoppedAnimation<Color>(Colors.white),
+                    )
                   : PDFViewer(
                       document: doc,
                     ),
@@ -58,18 +62,20 @@ class _ManualsState extends State<Manuals> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     RaisedButton(
-                      color: Colors.black,
+                      color: Colors.white,
                       child: Text(
                         'Covid Vaccine Manual',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
                       ),
                       onPressed: _loadFromAssets2,
                     ),
                     RaisedButton(
-                      color: Colors.black,
+                      color: Colors.white,
                       child: Text(
                         'Covid Vaccine FAQ',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
                       ),
                       onPressed: _loadFromAssets1,
                     ),

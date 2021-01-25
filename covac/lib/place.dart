@@ -81,8 +81,9 @@ class _PlaceState extends State<Place> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Choose place for vaccination'),
-          backgroundColor: Colors.black,
+         backgroundColor: Colors.blueGrey[900],
         ),
+        backgroundColor: Colors.blueGrey[900],
         body: SafeArea(
             child: Center(
                 child:
@@ -97,10 +98,17 @@ class _PlaceState extends State<Place> {
               child: Column(
                 children: fList
                     .map((data) => RadioListTile(
-                          title: Text("${data.name}"),
+                          activeColor: Colors.white,
+                          title: Text(
+                            "${data.name}",
+                            style: TextStyle(color: Colors.white),
+                          ),
                           groupValue: id,
                           value: data.index,
-                          subtitle: Text("${data.time}"),
+                          subtitle: Text(
+                            "${data.time}",
+                            style: TextStyle(color: Colors.white),
+                          ),
                           onChanged: (val) {
                             setState(() {
                               radioItem = data.name;
@@ -114,6 +122,7 @@ class _PlaceState extends State<Place> {
             Padding(
               padding: EdgeInsets.all(8.0),
               child: RaisedButton(
+                color: Colors.white,
                 onPressed: () {
                   if (id != 0) {
                     Navigator.pop(context, radioItem);
@@ -121,7 +130,10 @@ class _PlaceState extends State<Place> {
                     showAlertDialog(context);
                   }
                 },
-                child: Text('Confirm'),
+                child: Text(
+                  'Confirm',
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
             ),
           ],

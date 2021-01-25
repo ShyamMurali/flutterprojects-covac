@@ -3,29 +3,30 @@ import 'citizen.dart';
 import 'package:flutter/material.dart';
 
 Citizen _citizen1;
-void run(BuildContext context){
-Navigator.pushNamed(context, CovidQuiz.routename,arguments: _citizen1);
+void run(BuildContext context) {
+  Navigator.pushNamed(context, CovidQuiz.routename, arguments: _citizen1);
 }
 
 class Covid_Safety extends StatelessWidget {
-  static const routename ='/covidsafety';
+  static const routename = '/covidsafety';
   Citizen _citizen;
-  Covid_Safety(this._citizen){
-    _citizen1 =_citizen;
+  Covid_Safety(this._citizen) {
+    _citizen1 = _citizen;
   }
- 
+
   @override
   Widget build(BuildContext context) {
-
-   
     return Scaffold(
-      appBar: AppBar(title: Text('Covid Saftey Information'),
-      backgroundColor: Colors.black,),
-        body: BodyWidget(),
-      
+      appBar: AppBar(
+        title: Text('Covid Saftey Information'),
+        backgroundColor: Colors.blueGrey[900],
+      ),
+      backgroundColor: Colors.blueGrey[900],
+      body: BodyWidget(),
     );
   }
 }
+
 class BodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -39,14 +40,14 @@ class BodyWidget extends StatelessWidget {
       ),
       RaisedButton(
         onPressed: () {
-         run(context);
+          run(context);
         },
-         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: Text(
           'Ready to take the quiz',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
-        color: Colors.black,
+        color: Colors.white,
       ),
     ]);
   }

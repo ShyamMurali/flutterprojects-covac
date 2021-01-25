@@ -55,9 +55,9 @@ class _SlotBookingState extends State<SlotBooking> {
       confirmText: 'Book',
     );
     if (picked != null)
-    setState(() {
-      selectedDate = picked;
-    });
+      setState(() {
+        selectedDate = picked;
+      });
   }
 
   _place() async {
@@ -72,8 +72,9 @@ class _SlotBookingState extends State<SlotBooking> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Slot booking "),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.blueGrey[900],
       ),
+      backgroundColor: Colors.blueGrey[900],
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -81,12 +82,18 @@ class _SlotBookingState extends State<SlotBooking> {
           children: <Widget>[
             Text(
               "Selected Place: $selectedPlace",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
             Text(
               "Selected Date: ${selectedDate.day}/${selectedDate.month}/${selectedDate.year}",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
             SizedBox(
@@ -101,9 +108,9 @@ class _SlotBookingState extends State<SlotBooking> {
                     child: Text(
                       'Request Booking',
                       style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
+                          color: Colors.black, fontWeight: FontWeight.bold),
                     ),
-                    color: Colors.black,
+                    color: Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                   ),
@@ -115,9 +122,9 @@ class _SlotBookingState extends State<SlotBooking> {
                     child: Text(
                       'Select another booking date',
                       style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
+                          color: Colors.black, fontWeight: FontWeight.bold),
                     ),
-                    color: Colors.black,
+                    color: Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                   ),
@@ -131,9 +138,9 @@ class _SlotBookingState extends State<SlotBooking> {
                     child: Text(
                       'Select another place for vaccination',
                       style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
+                          color: Colors.black, fontWeight: FontWeight.bold),
                     ),
-                    color: Colors.black,
+                    color: Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                   ),
@@ -144,12 +151,18 @@ class _SlotBookingState extends State<SlotBooking> {
               Text(
                 'Your booking is being processed!\nBadge Received on completion of this challenge!!',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
               ),
             if (widget._citizen.isbooked == true)
               Text(
                 'Yaay your booking is confirmed!',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
               ),
           ],
         ),

@@ -31,7 +31,7 @@ class _BookingConformationCheckerState
         for (var key in keys) {
           if (values[key]['isrequestbooking'] == true &&
               values[key]['isbooked'] == false &&
-           widget._vaccinator.placereserved == values[key]['placebooked']) {
+              widget._vaccinator.placereserved == values[key]['placebooked']) {
             person p = person(values[key]['name'].toString(),
                 values[key]['mobileno'].toString());
             print('name: ' +
@@ -79,6 +79,7 @@ class _BookingConformationCheckerState
                 );
               },
               child: Card(
+                color: Colors.white,
                 margin: EdgeInsets.only(right: 10, left: 10, bottom: 5, top: 5),
                 elevation: 1,
                 child: ListTile(
@@ -251,17 +252,21 @@ class _BookingConformationCheckerState
     return Scaffold(
         appBar: AppBar(
           title: Text('Confirm Booking'),
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.blueGrey[900],
         ),
+        backgroundColor: Colors.blueGrey[900],
         body: Center(
             child: Stack(children: <Widget>[
           isloading
               ? CircularProgressIndicator(
-                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.black),
+                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
                   semanticsLabel: "Loading..",
                   semanticsValue: "Loading..",
                 )
-              : generateItemsList(),
+              : conformationList.length == 0
+                  ? Text("No bookings to be confirmed!",
+                      style: TextStyle(fontSize: 20, color: Colors.white))
+                  : generateItemsList(),
         ])));
   }
 }

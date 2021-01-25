@@ -44,6 +44,7 @@ class _UploadImageState extends State<UploadImage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey[900],
       body: Stack(
         children: <Widget>[
           Container(
@@ -52,7 +53,7 @@ class _UploadImageState extends State<UploadImage> {
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(50.0),
                   bottomRight: Radius.circular(50.0)),
-              color: Colors.black,
+              color: Colors.white,
             ),
           ),
           Container(
@@ -64,10 +65,11 @@ class _UploadImageState extends State<UploadImage> {
                   child: Center(
                     child: Text(
                       "Upload your selfie while taking your vaccine",
+                      textAlign: TextAlign.center,
                       style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 28,
-                          fontStyle: FontStyle.italic),
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -86,6 +88,7 @@ class _UploadImageState extends State<UploadImage> {
                               : FlatButton(
                                   child: Icon(
                                     Icons.add_a_photo,
+                                    color: Colors.white,
                                     size: 50,
                                   ),
                                   onPressed: pickImage,
@@ -114,7 +117,8 @@ class _UploadImageState extends State<UploadImage> {
             margin: const EdgeInsets.only(
                 top: 0, left: 60.0, right: 60.0, bottom: 15.0),
             decoration: BoxDecoration(
-                color: Colors.black, borderRadius: BorderRadius.circular(30.0)),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(30.0)),
             child: FlatButton(
               onPressed: () {
                 //uploadImageToFirebase(context);
@@ -128,7 +132,11 @@ class _UploadImageState extends State<UploadImage> {
               },
               child: Text(
                 "Upload and go back to challenges\nBadge collected!",
-                style: TextStyle(color: Colors.white, fontSize: 20),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
               ),
             ),
           ),
