@@ -16,6 +16,7 @@ class BookingConformationChecker extends StatefulWidget {
 
 class _BookingConformationCheckerState
     extends State<BookingConformationChecker> {
+  final _db_ref =FirebaseDatabase.instance.reference();
   bool isloading;
 
   void work() async {
@@ -117,7 +118,7 @@ class _BookingConformationCheckerState
                             style: TextStyle(color: Colors.red),
                           ),
                           onPressed: () {
-                            dbref
+                            _db_ref
                                 .child(
                                     'citizen/${conformationList[index].mobileno}')
                                 .update({
@@ -159,7 +160,7 @@ class _BookingConformationCheckerState
                           ),
                           onPressed: () {
                             // TODO: Delete the item from DB etc..
-                            dbref
+                            _db_ref
                                 .child(
                                     'citizen/${conformationList[index].mobileno}')
                                 .update({

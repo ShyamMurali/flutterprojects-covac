@@ -16,7 +16,7 @@ final occupationcontroller = TextEditingController();
 final aadharcardconrtroller = TextEditingController();
 final mobilenocontroller = TextEditingController();
 final statecontoller = TextEditingController();
-final dbref = FirebaseDatabase.instance.reference();
+
 
 void register(
     {String name,
@@ -41,39 +41,8 @@ void register(
       state: state,
       streetname: streetname,
       occupation: occupation);
-
-  //if(user == null){
-
-  dbref.child("citizen/${citizen.mobileno}").set({
-    'name': citizen.name,
-    'age': citizen.age,
-    'occupation': citizen.occupation,
-    'mobileno': citizen.mobileno,
-    'pincode': citizen.pincode,
-    'houseno': citizen.houseno,
-    'aadharcardno': citizen.aaharcardno,
-    'state': state,
-    'streetname': citizen.streetname,
-    'date': DateTime.now().toString(),
-    'isbooked': citizen.isbooked,
-    'isvaccinated': citizen.isvaccinated,
-    'isrequestbooking': citizen.isrequestbooking,
-    'placebooked': "none",
-    'isbadge1': citizen.isbadge1,
-    'isbadge2': citizen.isbadge2,
-    'isbadge3': citizen.isbadge3,
-    'isbadge4': citizen.isbadge4,
-    'isbadge5': citizen.isbadge5,
-    'badgeno': citizen.badgeno,
-  }).then((onValue) {
-    print('in register()');
-
-    // //  login(citizen.mobileno.toString(),context);
-    // Navigator.pushReplacementNamed(
-    //   context, CitizenHomePage.routename,arguments: citizen);
     Navigator.pushReplacementNamed(context, OTPScreen.routename,
         arguments: citizen);
-  });
 }
 
 class CitizenRegisteration extends StatefulWidget {
@@ -100,10 +69,7 @@ class _CitizenRegisterationState extends State<CitizenRegisteration> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              //  if(citizen != null)
-              //  Center(child:
-              //  SpinKitDualRing(color: Colors.black,
-              //  duration: Duration(seconds: 1),) ,),
+             
 
               if (citizen == null)
                 Column(

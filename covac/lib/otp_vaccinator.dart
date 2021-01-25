@@ -1,10 +1,10 @@
-
 import 'package:covac/vaccinator.dart';
 import 'package:covac/vaccinator_home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class OTPVacScreen extends StatefulWidget {
   static const routename = '/otpvaccinator';
@@ -65,7 +65,24 @@ class _OTPScreenState extends State<OTPVacScreen> {
                           verificationId: _verificationCode, smsCode: pin))
                       .then((value) async {
                     if (value.user != null) {
-                      Fluttertoast.showToast(
+                    
+                    var vac = widget._vaccinator;
+                  final _fbReference = FirebaseDatabase.instance.reference();
+                  _fbReference
+                      .child(
+                          'vaccinator/${widget._vaccinator.mobileno.toString()}')
+                      .set({
+                    'name': vac.name,
+                    'age': vac.age,
+                    'date': vac.date.toString(),
+                    'placereserved': vac.placereserved,
+                    'time': vac.time,
+                    'mobileno': vac.mobileno,
+                    'numberofpplvaccinated': vac.numberofpplvaccinated,
+                  }).then((value) {
+
+
+                          Fluttertoast.showToast(
                         msg: "Registeration Sucessfull! ",
                         toastLength: Toast.LENGTH_SHORT,
                         gravity: ToastGravity.CENTER,
@@ -78,6 +95,11 @@ class _OTPScreenState extends State<OTPVacScreen> {
                       Navigator.pushReplacementNamed(
                           context, VaccinatorHomepage.routename,
                           arguments: widget._vaccinator);
+                   
+                  });
+
+                  
+                
                     }
                   });
                 } catch (e) {
@@ -101,18 +123,37 @@ class _OTPScreenState extends State<OTPVacScreen> {
               .signInWithCredential(credential)
               .then((value) async {
             if (value.user != null) {
-              Fluttertoast.showToast(
-                msg: "Registeration Sucessfull! ",
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.CENTER,
-                timeInSecForIosWeb: 1,
-                backgroundColor: Colors.blueGrey[900],
-                textColor: Colors.white,
-                fontSize: 20,
-              );
+             var vac = widget._vaccinator;
+                  final _fbReference = FirebaseDatabase.instance.reference();
+                  _fbReference
+                      .child(
+                          'vaccinator/${widget._vaccinator.mobileno.toString()}')
+                      .set({
+                    'name': vac.name,
+                    'age': vac.age,
+                    'date': vac.date.toString(),
+                    'placereserved': vac.placereserved,
+                    'time': vac.time,
+                    'mobileno': vac.mobileno,
+                    'numberofpplvaccinated': vac.numberofpplvaccinated,
+                  }).then((value) {
 
-              Navigator.pushReplacementNamed(context, VaccinatorHomepage.routename,
-                  arguments: widget._vaccinator);
+
+                          Fluttertoast.showToast(
+                        msg: "Registeration Sucessfull! ",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.black,
+                        textColor: Colors.white,
+                        fontSize: 20,
+                      );
+
+                      Navigator.pushReplacementNamed(
+                          context, VaccinatorHomepage.routename,
+                          arguments: widget._vaccinator);
+                   
+                  });
             }
           });
         },

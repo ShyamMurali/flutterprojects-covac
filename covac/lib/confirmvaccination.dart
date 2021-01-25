@@ -1,4 +1,3 @@
-import 'package:covac/citizen_registeration.dart';
 import 'package:covac/vaccinator.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +18,7 @@ class ConfirmVaccination extends StatefulWidget {
 }
 
 class _ConfirmVaccinationState extends State<ConfirmVaccination> {
+  final _dbref =FirebaseDatabase.instance.reference();
   bool isloading;
   void work() async {
     final dbreference = FirebaseDatabase.instance.reference();
@@ -118,7 +118,7 @@ class _ConfirmVaccinationState extends State<ConfirmVaccination> {
                             style: TextStyle(color: Colors.red),
                           ),
                           onPressed: () {
-                            dbref
+                            _dbref
                                 .child(
                                     'citizen/${conformationList[index].mobileno}')
                                 .update({
@@ -161,7 +161,7 @@ class _ConfirmVaccinationState extends State<ConfirmVaccination> {
                             // TODO: Delete the item from DB etc..
                             int num = 0;
 
-                            dbref
+                            _dbref
                                 .child(
                                     'citizen/${conformationList[index].mobileno}')
                                 .once()
@@ -173,7 +173,7 @@ class _ConfirmVaccinationState extends State<ConfirmVaccination> {
                                 print("data is null");
                             });
 
-                            dbref
+                            _dbref
                                 .child(
                                     'citizen/${conformationList[index].mobileno}')
                                 .update({
@@ -181,7 +181,7 @@ class _ConfirmVaccinationState extends State<ConfirmVaccination> {
                               'isbadge4': true,
                               //  'badgeno':num+1,
                             }).then((value) {
-                              dbref
+                              _dbref
                                   .child(
                                       'vaccinator/${widget._vaccinator.mobileno}')
                                   .update({

@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class OTPScreen extends StatefulWidget {
   static const routename = '/otp';
@@ -30,7 +31,7 @@ class _OTPScreenState extends State<OTPScreen> {
     return Scaffold(
       key: _scaffoldkey,
       appBar: AppBar(
-        title: Text('OTP Verification'),
+        title: Text('OTP Verification -Citizen'),
          backgroundColor: Colors.blueGrey[900],
       ),
       body: Column(
@@ -74,11 +75,38 @@ class _OTPScreenState extends State<OTPScreen> {
                         fontSize: 20,
                       );
 
-                      Navigator.pushReplacementNamed(
+  final _dbref = FirebaseDatabase.instance.reference();
+  _dbref.child("citizen/${widget._citizen.mobileno}").set({
+    'name': widget._citizen.name,
+    'age': widget._citizen.age,
+    'occupation': widget._citizen.occupation,
+    'mobileno': widget._citizen.mobileno,
+    'pincode': widget._citizen.pincode,
+    'houseno': widget._citizen.houseno,
+    'aadharcardno': widget._citizen.aaharcardno,
+    'state': widget._citizen.state,
+    'streetname': widget._citizen.streetname,
+    'date': DateTime.now().toString(),
+    'isbooked': widget._citizen.isbooked,
+    'isvaccinated': widget._citizen.isvaccinated,
+    'isrequestbooking': widget._citizen.isrequestbooking,
+    'placebooked': "none",
+    'isbadge1': widget._citizen.isbadge1,
+    'isbadge2': widget._citizen.isbadge2,
+    'isbadge3':widget._citizen.isbadge3,
+    'isbadge4':widget._citizen.isbadge4,
+    'isbadge5': widget._citizen.isbadge5,
+    'badgeno': widget._citizen.badgeno,
+  }).then((onValue) {
+    print(' otp sucess upload data ');
+  
+     Navigator.pushReplacementNamed(
                           context, CitizenHomePage.routename,
                           arguments: widget._citizen);
+  });
                     }
                   });
+
                 } catch (e) {
                   FocusScope.of(context).unfocus();
                   _scaffoldkey.currentState
@@ -110,8 +138,36 @@ class _OTPScreenState extends State<OTPScreen> {
                 fontSize: 20,
               );
 
-              Navigator.pushReplacementNamed(context, CitizenHomePage.routename,
-                  arguments: widget._citizen);
+   final _dbref = FirebaseDatabase.instance.reference();
+  _dbref.child("citizen/${widget._citizen.mobileno}").set({
+    'name': widget._citizen.name,
+    'age': widget._citizen.age,
+    'occupation': widget._citizen.occupation,
+    'mobileno': widget._citizen.mobileno,
+    'pincode': widget._citizen.pincode,
+    'houseno': widget._citizen.houseno,
+    'aadharcardno': widget._citizen.aaharcardno,
+    'state': widget._citizen.state,
+    'streetname': widget._citizen.streetname,
+    'date': DateTime.now().toString(),
+    'isbooked': widget._citizen.isbooked,
+    'isvaccinated': widget._citizen.isvaccinated,
+    'isrequestbooking': widget._citizen.isrequestbooking,
+    'placebooked': "none",
+    'isbadge1': widget._citizen.isbadge1,
+    'isbadge2': widget._citizen.isbadge2,
+    'isbadge3':widget._citizen.isbadge3,
+    'isbadge4':widget._citizen.isbadge4,
+    'isbadge5': widget._citizen.isbadge5,
+    'badgeno': widget._citizen.badgeno,
+  }).then((onValue) {
+    print(' otp sucess upload data ');
+  
+     Navigator.pushReplacementNamed(
+                          context, CitizenHomePage.routename,
+                          arguments: widget._citizen);
+  });
+
             }
           });
         },

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'vaccinator.dart';
 import 'vaccinator_home.dart';
 
-final fbreference = FirebaseDatabase.instance.reference();
+final _fbreference = FirebaseDatabase.instance.reference();
 final namecontroller = TextEditingController();
 final agecontroller = TextEditingController();
 final addresscontroller = TextEditingController();
@@ -14,7 +14,7 @@ final mobilenocontroller = TextEditingController();
 
 class VaccinatorRegisteration extends StatefulWidget {
   static const routeName = '/vaccineregisteration';
-  Vaccinator vaccinator;
+  Vaccinator _vaccinator;
   @override
   _VaccinatorRegisterationState createState() =>
       _VaccinatorRegisterationState();
@@ -27,16 +27,16 @@ class _VaccinatorRegisterationState extends State<VaccinatorRegisteration> {
 
   @override
   void initState() {
-    if (widget.vaccinator != null) {
-      fbreference
-          .child('vaccinator/${widget.vaccinator.mobileno.toString()}')
+    if (widget._vaccinator != null) {
+      _fbreference
+          .child('vaccinator/${widget._vaccinator.mobileno.toString()}')
           .once()
           .then((DataSnapshot data) {
         if (data != null) {
           print('data snapshot:' + data.value.toString());
           //  var keys= data.key;
           var value = data.value;
-          widget.vaccinator = Vaccinator(
+          widget._vaccinator = Vaccinator(
             age: value['age'],
             date: DateTime.parse(value['date']),
             mobileno: value['mobileno'],
@@ -46,7 +46,7 @@ class _VaccinatorRegisterationState extends State<VaccinatorRegisteration> {
           );
 
           Navigator.pushReplacementNamed(context, VaccinatorHomepage.routename,
-              arguments: widget.vaccinator);
+              arguments: widget._vaccinator);
         }
       });
     }
@@ -167,7 +167,7 @@ class _VaccinatorRegisterationState extends State<VaccinatorRegisteration> {
               ),
               RaisedButton(
                 onPressed: () {
-                  widget.vaccinator = Vaccinator(
+                  widget._vaccinator = Vaccinator(
                       name: namecontroller.text.trim(),
                       age: int.parse(agecontroller.text.trim()),
                       date: DateTime.now(),
@@ -175,24 +175,12 @@ class _VaccinatorRegisterationState extends State<VaccinatorRegisteration> {
                       time: _selectedCompany.time,
                       mobileno: int.parse(mobilenocontroller.text.trim()));
 
-                  var vac = widget.vaccinator;
-
-                  fbreference
-                      .child(
-                          'vaccinator/${widget.vaccinator.mobileno.toString()}')
-                      .set({
-                    'name': vac.name,
-                    'age': vac.age,
-                    'date': vac.date.toString(),
-                    'placereserved': vac.placereserved,
-                    'time': vac.time,
-                    'mobileno': vac.mobileno,
-                    'numberofpplvaccinated': vac.numberofpplvaccinated,
-                  }).then((value) {
+                      print('in vaccine reg');
+                   
                     Navigator.pushReplacementNamed(
                         context, OTPVacScreen.routename,
-                        arguments: widget.vaccinator);
-                  });
+                        arguments: widget._vaccinator);
+
                 },
                 child: Text(
                   "Register!",
