@@ -1,3 +1,3 @@
 # flutterprojects-covac
 Covid vaccination app
-![](mainpage.jpg =250x)
+<a href="url"><img src="/mainpage.jpg" align="left" height="200" width="100" ></a>
