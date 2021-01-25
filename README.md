@@ -1,3 +1,3 @@
 # flutterprojects-covac
 Covid vaccination app
-![](mainpage.jpg)
+![](mainpage.jpg =250x)
