@@ -10,6 +10,5 @@
 <a href="url"><img src="/place_selection.jpg" align="left" height="400" width="200" ></a>
 <a href="url"><img src="/request_booking.jpg" align="left" height="400" width="200" ></a>
 <a href="url"><img src="/slot_booking.jpg" align="left" height="400" width="200" ></a>
-<a href="url"><img src="/mainpage.jpg" align="left" height="400" width="200" ></a>
 <a href="url"><img src="/vaccinator_home.jpg" align="left" height="400" width="200" ></a>
 <a href="url"><img src="/vaccinator_home_nav.jpg" align="left" height="400" width="200" ></a>
